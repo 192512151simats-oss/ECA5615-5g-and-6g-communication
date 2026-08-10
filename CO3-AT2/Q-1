@@ -1,1 +1,47 @@
+clc;
+clear;
+close all;
 
+% Smart Irrigation Communication Model
+
+numSensors = 10;
+
+% Simulated soil moisture values (%)
+soilMoisture = randi([20 80],1,numSensors);
+
+threshold = 40;
+
+% Irrigation Decision
+irrigationStatus = zeros(1,numSensors);
+
+for i = 1:numSensors
+    if soilMoisture(i) < threshold
+        irrigationStatus(i) = 1; % ON
+    else
+        irrigationStatus(i) = 0; % OFF
+    end
+end
+
+disp('Soil Moisture Values (%)');
+disp(soilMoisture);
+
+disp('Irrigation Status (1=ON, 0=OFF)');
+disp(irrigationStatus);
+
+% Visualization
+figure;
+
+subplot(2,1,1);
+bar(soilMoisture);
+title('Crop Monitoring - Soil Moisture');
+xlabel('Sensor Node');
+ylabel('Moisture (%)');
+grid on;
+
+subplot(2,1,2);
+stem(irrigationStatus,'filled');
+title('Smart Irrigation Control');
+xlabel('Sensor Node');
+ylabel('Pump Status');
+ylim([-0.2 1.2]);
+grid on;
