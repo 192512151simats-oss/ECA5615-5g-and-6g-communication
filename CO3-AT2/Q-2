@@ -1,1 +1,43 @@
+clc;
+clear;
+close all;
 
+% Livestock Tracking Using Wireless Sensors
+
+numAnimals = 8;
+
+% Random animal positions
+x = randi([0 100],1,numAnimals);
+y = randi([0 100],1,numAnimals);
+
+% Base Station Position
+baseX = 50;
+baseY = 50;
+
+% Distance Calculation
+distance = sqrt((x-baseX).^2 + (y-baseY).^2);
+
+disp('Animal Coordinates');
+disp([x' y']);
+
+disp('Distance from Base Station');
+disp(distance');
+
+% Visualization
+figure;
+
+scatter(x,y,100,'filled');
+hold on;
+
+plot(baseX,baseY,'rp','MarkerSize',15,'LineWidth',2);
+
+for i = 1:numAnimals
+    line([x(i) baseX],[y(i) baseY]);
+end
+
+title('Wireless Livestock Tracking Architecture');
+xlabel('X Position');
+ylabel('Y Position');
+legend('Animals','Base Station');
+grid on;
+axis([0 100 0 100]);
